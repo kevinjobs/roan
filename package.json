@@ -1,0 +1,24 @@
+{
+  "name": "mintserver",
+  "version": "0.0.1",
+  "description": "bff frame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinjobs/MintServer.git"
+  },
+  "keywords": [
+    "koa",
+    "nodejs",
+    "restful"
+  ],
+  "author": "Kevin Jobs (me@kevinjobs.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinjobs/MintServer/issues"
+  },
+  "homepage": "https://github.com/kevinjobs/MintServer#readme"
+}
