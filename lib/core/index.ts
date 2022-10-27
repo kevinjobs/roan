@@ -3,6 +3,7 @@ import path from "path";
 import { getHooks } from "./utils/get-hooks";
 
 const HOOKS = [
+  "router",
   "lift",
 ]
 

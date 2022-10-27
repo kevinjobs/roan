@@ -9,7 +9,9 @@
   "author": "Kevin Jobs(me@kevinjobs.com)",
   "license": "MIT",
   "dependencies": {
-    "koa": "^2.13.4"
+    "glob": "^8.0.3",
+    "koa": "^2.13.4",
+    "koa-compose": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^12.20.55",
