@@ -1,0 +1,11 @@
+{
+  "name": "mts-example",
+  "version": "0.0.1",
+  "description": "Mint Server Example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Jobs (me@kevinjobs.com)",
+  "license": "MIT"
+}
