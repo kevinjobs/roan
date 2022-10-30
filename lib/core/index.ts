@@ -31,9 +31,12 @@ export default async function MintServer(params: Params) {
     try {
       await hook.default(app);
     } catch (err) {
-      throw new HookImportError();
+      throw new HookImportError("something goes wrong when importing the" +
+        " hook: " + hook);
     }
   }
 
   app.on("error", err => {});
+
+  return app;
 }
