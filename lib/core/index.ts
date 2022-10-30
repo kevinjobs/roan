@@ -7,13 +7,22 @@ const HOOKS = [
   "lift",
 ]
 
+type App = {
+  appPath?: string;
+  fileExt?: string;
+} & typeof Koa;
+
 type Params = {
+  /**
+   * the root path of app
+   */
   appPath: string;
 }
 
 export default async function MintServer(params: Params) {
-  const app = new Koa();
+  const app: App = new Koa();
   const { appPath } = params;
+
   app.appPath = appPath;
 
   const env = process.env.NODE_ENV;
