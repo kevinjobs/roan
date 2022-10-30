@@ -1,8 +1,10 @@
 export default app => {
   return {
     devServer: {
-      port: 8888
+      // port: 7777
     },
-    router: "koa-router" // file or koa-router
+    router: {
+      type: "koa-router" // file or koa-router
+    }
   }
 }

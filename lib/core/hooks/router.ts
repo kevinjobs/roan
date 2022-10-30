@@ -1,22 +1,29 @@
 import glob from "glob";
 import path from "path";
 import compose from "koa-compose";
+import {App} from "../types";
 
-// replace the backslash
+// replace the backslash in the windows platform
 function replaceBackslash(src: string) {
-  return src.replace(/\\/g, "\/");
+  if (process.platform === "win32") {
+    return src.replace(/\\/g, "\/");
+  }
 }
 
-export default async (app) => {
-  const { router="file" } = app.config;
-  const controllerPath = path.join(app.appPath, "controllers");
-  const pattern = replaceBackslash(path.resolve(controllerPath, `**/*${app.extName}`));
+export default async function RouteHook (app: App) {
+  const { roan } = app;
+  const { appPath, extName } = roan;
+  const routerType = roan?.config?.router?.type || "file";
+
+  const controllerPath = path.join(appPath, "controllers");
+  const pattern = replaceBackslash(path.resolve(controllerPath, `**/*${extName}`));
   const fileList = glob.sync(pattern);
 
-  if (router === "file") {
+  if (routerType === "file") {
     let routerMap = {};
     for (let item of fileList) {
       const controller = await import(item);
+
       const { method, handler } = controller.default;
       const relative = path.relative(controllerPath, item);
       const extname = path.extname(item);
@@ -37,8 +44,8 @@ export default async (app) => {
       }
       return next();
     })
-  } else if (router === "koa-router") {
-    const pattern = replaceBackslash(path.resolve(app.appPath, "./routers", `**/*${app.extName}`));
+  } else if (routerType === "koa-router") {
+    const pattern = replaceBackslash(path.resolve(appPath, "./routers", `**/*${extName}`));
     const routerFiles = glob.sync(pattern);
     const register = async () => {
       let routers = [];

@@ -1,4 +1,3 @@
-import MintServer from "../lib/core";
-import path from "path";
+import Roan from "../lib/core";
 
-const app = MintServer({appPath: __dirname});
+const app = Roan({appPath: __dirname});
