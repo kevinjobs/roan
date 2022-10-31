@@ -14,6 +14,7 @@
     "roan-core": "workspace:*"
   },
   "devDependencies": {
+    "@types/glob": "^8.0.0",
     "@types/koa": "^2.13.5"
   }
 }

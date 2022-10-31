@@ -4,6 +4,10 @@ import fs from "fs";
 import path from "path";
 import {Roan} from "roan-core";
 
+/**
+ * print init info and start the server (load it to the app-ext)
+ * @param app Roan
+ */
 export default async function RoanHookLift (app: Roan) {
   const IS_DEV = process.env.NODE_ENV === "development";
 
@@ -25,12 +29,15 @@ export default async function RoanHookLift (app: Roan) {
   }
 
   const opts = { key, cert };
+  let server;
 
   if (IS_DEV) {
-    const server = http.createServer(app.callback()).listen(port, host);
+    server = http.createServer(app.callback()).listen(port, host);
   } else {
-    const server = https.createServer(opts, app.callback()).listen(port, host);
+    server = https.createServer(opts, app.callback()).listen(port, host);
   }
+
+  app.ext.server = server;
 
   printLogo();
   log(`Server at: ${IS_DEV ? "http" : "https"}://${host}:${port}`);

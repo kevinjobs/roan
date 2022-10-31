@@ -44,12 +44,16 @@ importers:
 
   lib/packages/roan-hook-lift:
     specifiers:
+      '@types/glob': ^8.0.0
       roan-core: workspace:*
     dependencies:
       roan-core: link:../core
+    devDependencies:
+      '@types/glob': 8.0.0
 
   lib/packages/roan-hook-router:
     specifiers:
+      '@types/glob': ^8.0.0
       '@types/koa': ^2.13.5
       glob: ^8.0.3
       koa-compose: ^4.1.0
@@ -59,6 +63,7 @@ importers:
       koa-compose: 4.1.0
       roan-core: link:../core
     devDependencies:
+      '@types/glob': 8.0.0
       '@types/koa': 2.13.5
 
 packages:
@@ -151,6 +156,13 @@ packages:
       '@types/serve-static': 1.15.0
     dev: true
 
+  /@types/glob/8.0.0:
+    resolution: {integrity: sha512-l6NQsDDyQUVeoTynNpC9uRvCUint/gSUXQA2euwmTuWGvPY5LSDUu6tkCtJB2SvGQlJQzLaKqcGZP4//7EDveA==}
+    dependencies:
+      '@types/minimatch': 5.1.2
+      '@types/node': 12.20.55
+    dev: true
+
   /@types/http-assert/1.5.3:
     resolution: {integrity: sha512-FyAOrDuQmBi8/or3ns4rwPno7/9tJTijVW6aQQjK02+kOQ8zmoNg2XJtAuQhvQcy1ASJq38wirX5//9J1EqoUA==}
     dev: true
@@ -184,6 +196,10 @@ packages:
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+    dev: true
+
+  /@types/minimatch/5.1.2:
+    resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
     dev: true
 
   /@types/node/12.20.55:

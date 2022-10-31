@@ -38,7 +38,13 @@ export interface Config {
   }
 }
 
-export type Roan = { config: Config; } & Koa;
+export type Roan = {
+  config: Config;
+  /**
+   * you can load something else here
+   */
+  ext?: any;
+} & Koa;
 export type Params = Pick<Config, "appPath" | "server" | "router">;
 
 export default async function RoanServer(params: Params) :Promise<Roan> {
