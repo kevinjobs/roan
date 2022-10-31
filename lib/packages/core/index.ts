@@ -41,7 +41,7 @@ export interface Config {
   }
 }
 
-export type Roan = {
+export type RoanApplication = {
   config: Config;
   /**
    * you can load something else here
@@ -50,12 +50,12 @@ export type Roan = {
 } & Koa;
 export type Params = Pick<Config, "appPath" | "server" | "router">;
 
-export default async function RoanServer(params: Params) :Promise<Roan> {
+export default async function RoanServer(params: Params) :Promise<RoanApplication> {
   const { appPath } = params;
   const env = process.env.NODE_ENV as NODE_ENV;
   const extName = env === "development" ? ".ts" : ".js";
 
-  const app = (new Koa()) as Roan;
+  const app = (new Koa()) as RoanApplication;
 
   app.ext = {};
   app.config = { appPath, env, extName };
@@ -67,14 +67,15 @@ export default async function RoanServer(params: Params) :Promise<Roan> {
   await RoanHookRouter(app);
 
   handleEvents(app);
+
   return app;
 }
 
 /**
  * get config from config path
- * @param app Roan
+ * @param app RoanApplication
  */
-async function getConfig(app: Roan) {
+async function getConfig(app: RoanApplication) {
   const {appPath, extName, env} = app.config;
 
   const base = await import(path.join(appPath, `config/config.base${extName}`));
@@ -94,8 +95,8 @@ function merge(base: Config, other: Config) :Config {
 
 /**
  * handle app events, like "error", etc..
- * @param app Roan
+ * @param app RoanApplication
  */
-function handleEvents(app: Roan) {
+function handleEvents(app: RoanApplication) {
   app.on("error", err => {});
 }

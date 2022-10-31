@@ -1,9 +1,9 @@
 import glob from "glob";
 import path from "path";
 import compose from "koa-compose";
-import {Roan} from "roan-core";
+import {RoanApplication} from "roan-core";
 
-export default async function RoanHookRouter (app: Roan) {
+export default async function RoanHookRouter (app: RoanApplication) {
   const { appPath } = app.config;
 
   const routerType = app.config.router?.type || "file";
@@ -21,10 +21,10 @@ export default async function RoanHookRouter (app: Roan) {
 
 /**
  * handle the router when it's type is file.
- * @param app Roan
+ * @param app RoanApplication
  * @param routersPath
  */
-async function handleFileRouter(app: Roan, routersPath: string) {
+async function handleFileRouter(app: RoanApplication, routersPath: string) {
   const appPath = app.config.appPath;
   const extName = app.config.extName;
 
@@ -59,10 +59,10 @@ async function handleFileRouter(app: Roan, routersPath: string) {
 
 /**
  * handle the router when it's type is koa-router.
- * @param app Roan
+ * @param app RoanApplication
  * @param routersPath
  */
-async function handleKoaRouter(app: Roan, routersPath: string) {
+async function handleKoaRouter(app: RoanApplication, routersPath: string) {
   const appPath = app.config.appPath;
   const extName = app.config.extName;
 

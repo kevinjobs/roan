@@ -2,13 +2,13 @@ import https from "https";
 import http from "http";
 import fs from "fs";
 import path from "path";
-import {Roan} from "roan-core";
+import {RoanApplication} from "roan-core";
 
 /**
  * print init info and start the server (load it to the app-ext)
- * @param app Roan
+ * @param app RoanApplication
  */
-export default async function RoanHookLift (app: Roan) {
+export default async function RoanHookLift (app: RoanApplication) {
   const IS_DEV = process.env.NODE_ENV === "development";
 
   const { config } = app;

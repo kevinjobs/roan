@@ -14,3 +14,5 @@ const config: Config = {
 }
 
 const app = RoanServer(config);
+
+export default app;
