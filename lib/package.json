@@ -1,5 +1,5 @@
 {
-  "name": "mts-core",
+  "name": "roan-core",
   "version": "0.0.1",
   "description": "Mint Server Core",
   "main": "./dist/core/index.js",
