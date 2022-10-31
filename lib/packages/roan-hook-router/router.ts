@@ -61,8 +61,11 @@ async function handleKoaRouter(app: Roan) {
   const appPath = app.config.appPath;
   const extName = app.config.extName;
 
-  const pattern = replaceBackslash(path.resolve(appPath, "./routers", `**/*${extName}`));
+  const routersPath = app.config?.router?.path || "routers";
+
+  const pattern = replaceBackslash(path.resolve(appPath, routersPath, `**/*${extName}`));
   const routerFiles = glob.sync(pattern);
+
   const register = async () => {
     let routers = [];
     for (let file of routerFiles) {
@@ -71,6 +74,7 @@ async function handleKoaRouter(app: Roan) {
     }
     return compose(routers);
   }
+
   app.use(await register());
 }
 
