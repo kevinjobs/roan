@@ -2,17 +2,16 @@ import https from "https";
 import http from "http";
 import fs from "fs";
 import path from "path";
-import {App} from "../types";
+import {Roan} from "roan-core";
 
-export default async function (app: App) {
+export default async function RoanHookLift (app: Roan) {
   const IS_DEV = process.env.NODE_ENV === "development";
 
-  const { roan } = app;
-  const { config } = roan;
+  const { config } = app;
 
-  const port = IS_DEV ? (config?.devServer?.port || 9526) : (config?.port || 9526);
-  const host = IS_DEV ? (config?.devServer?.host || "localhost") : (config?.host || "0.0.0.0");
-  const appPath = roan?.appPath;
+  const port = IS_DEV ? (config?.devServer?.port || 9526) : (config?.server?.port || 9526);
+  const host = IS_DEV ? (config?.devServer?.host || "localhost") : (config?.server?.host || "0.0.0.0");
+  const appPath = config?.appPath;
 
   let key;
   let cert;
