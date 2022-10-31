@@ -4,13 +4,17 @@ import compose from "koa-compose";
 import {Roan} from "roan-core";
 
 export default async function RoanHookRouter (app: Roan) {
+  const { appPath } = app.config;
+
   const routerType = app.config.router?.type || "file";
+  const routersPath = path.join(appPath, app.config?.router?.path || "routers");
+
   switch (routerType) {
     case "file":
-      await handleFileRouter(app);
+      await handleFileRouter(app, routersPath);
       break;
     case "koa-router":
-      await handleKoaRouter(app);
+      await handleKoaRouter(app, routersPath);
       break;
   }
 }
@@ -18,13 +22,13 @@ export default async function RoanHookRouter (app: Roan) {
 /**
  * handle the router when it's type is file.
  * @param app Roan
+ * @param routersPath
  */
-async function handleFileRouter(app: Roan) {
+async function handleFileRouter(app: Roan, routersPath: string) {
   const appPath = app.config.appPath;
   const extName = app.config.extName;
 
-  const controllerPath = path.join(appPath, "controllers");
-  const pattern = replaceBackslash(path.resolve(controllerPath, `**/*${extName}`));
+  const pattern = replaceBackslash(path.resolve(routersPath, `**/*${extName}`));
   const fileList = glob.sync(pattern);
 
   let routerMap = {};
@@ -32,7 +36,7 @@ async function handleFileRouter(app: Roan) {
     const controller = await import(item);
 
     const { method, handler } = controller.default;
-    const relative = path.relative(controllerPath, item);
+    const relative = path.relative(routersPath, item);
     const extname = path.extname(item);
 
     const fileRouter = replaceBackslash("/" + relative.split(extname)[0]);
@@ -56,14 +60,13 @@ async function handleFileRouter(app: Roan) {
 /**
  * handle the router when it's type is koa-router.
  * @param app Roan
+ * @param routersPath
  */
-async function handleKoaRouter(app: Roan) {
+async function handleKoaRouter(app: Roan, routersPath: string) {
   const appPath = app.config.appPath;
   const extName = app.config.extName;
 
-  const routersPath = app.config?.router?.path || "routers";
-
-  const pattern = replaceBackslash(path.resolve(appPath, routersPath, `**/*${extName}`));
+  const pattern = replaceBackslash(path.join(routersPath, `**/*${extName}`));
   const routerFiles = glob.sync(pattern);
 
   const register = async () => {
