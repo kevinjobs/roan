@@ -13,8 +13,9 @@
         "skipDefaultLibCheck": true,
         "allowJs": true,
         "baseUrl": "./",
-        "paths": {}
+        "paths": {},
+        "declaration": true
     },
-    "include": ["./lib/**/*", "test/*", "./example/**/*"],
+    "include": ["./packages/**/*", "./example/**/*"],
     "exclude": ["node_modules/**/*"]
 }

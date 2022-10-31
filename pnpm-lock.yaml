@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@types/chai': ^4.3.3
       '@types/mocha': ^10.0.0
-      '@types/node': ^12.20.55
+      '@types/node': ^18.11.8
       '@types/supertest': ^2.0.12
       chai: ^4.3.6
       cross-env: ^7.0.3
@@ -18,18 +18,19 @@ importers:
     devDependencies:
       '@types/chai': 4.3.3
       '@types/mocha': 10.0.0
-      '@types/node': 12.20.55
+      '@types/node': 18.11.8
       '@types/supertest': 2.0.12
       chai: 4.3.6
       cross-env: 7.0.3
       mocha: 10.1.0
       nodemon: 2.0.20
       supertest: 6.3.1
-      ts-node: 10.9.1_9474fcf7c17ec3eee4ea31b791d4bc6e
+      ts-node: 10.9.1_fa72e71e6d010c0abad9710428c8279e
       typescript: 4.8.4
 
   example:
     specifiers:
+      '@types/koa': ^2.13.5
       '@types/node': ^12.20.55
       koa-router: ^12.0.0
       roan-core: workspace:*
@@ -38,6 +39,7 @@ importers:
       koa-router: 12.0.0
       roan-core: link:../packages/core
     devDependencies:
+      '@types/koa': 2.13.5
       '@types/node': 12.20.55
       typescript: 4.8.4
 
@@ -227,6 +229,10 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
+  /@types/node/18.11.8:
+    resolution: {integrity: sha512-uGwPWlE0Hj972KkHtCDVwZ8O39GmyjfMane1Z3GUBGGnkZ2USDq7SxLpVIiIHpweY9DS0QTDH0Nw7RNBsAAZ5A==}
+    dev: true
+
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
@@ -246,7 +252,7 @@ packages:
     resolution: {integrity: sha512-mu/N4uvfDN2zVQQ5AYJI/g4qxn2bHB6521t1UuH09ShNWjebTqN0ZFuYK9uYjcgmI0dTQEs+Owi1EO6U0OkOZQ==}
     dependencies:
       '@types/cookiejar': 2.1.2
-      '@types/node': 12.20.55
+      '@types/node': 18.11.8
     dev: true
 
   /@types/supertest/2.0.12:
@@ -1334,7 +1340,7 @@ packages:
       nopt: 1.0.10
     dev: true
 
-  /ts-node/10.9.1_9474fcf7c17ec3eee4ea31b791d4bc6e:
+  /ts-node/10.9.1_fa72e71e6d010c0abad9710428c8279e:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -1353,7 +1359,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 12.20.55
+      '@types/node': 18.11.8
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
