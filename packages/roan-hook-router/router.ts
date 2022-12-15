@@ -1,7 +1,7 @@
 import glob from "glob";
 import path from "path";
 import compose from "koa-compose";
-import {RoanApplication} from "roan-core";
+import { RoanApplication } from "Params";
 
 export default async function RoanHookRouter (app: RoanApplication) {
   const { appPath } = app.config;

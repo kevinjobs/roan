@@ -1,4 +1,4 @@
-import {RoanApplication, Config} from "roan-core";
+import { RoanApplication, Config } from "Params";
 
 export default function DevConfig(app: RoanApplication) :Config {
   return {

@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
@@ -25,7 +25,7 @@ importers:
       mocha: 10.1.0
       nodemon: 2.0.20
       supertest: 6.3.1
-      ts-node: 10.9.1_fa72e71e6d010c0abad9710428c8279e
+      ts-node: 10.9.1_7jzoohtnaegavowzoeccrsbhty
       typescript: 4.8.4
 
   example:
@@ -1340,7 +1340,7 @@ packages:
       nopt: 1.0.10
     dev: true
 
-  /ts-node/10.9.1_fa72e71e6d010c0abad9710428c8279e:
+  /ts-node/10.9.1_7jzoohtnaegavowzoeccrsbhty:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:

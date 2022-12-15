@@ -1,102 +1,28 @@
 import Koa from "koa";
 import path from "path";
-import RoanHookLift from "roan-hook-lift";
-import RoanHookRouter from "roan-hook-router";
+import { RoanOptions, Config } from "./typings";
+import { DEFAULT_OPTIONS } from "./constant";
 
-export type NODE_ENV = "development" | "production" | "test";
+export default class RoanCore extends Koa {
+  public config: Config = null;
 
-export interface Config {
-  /**
-   * roan server root path
-   */
-  appPath?: string;
-  /**
-   * file extension name, depends on process.env.NODE_ENV
-   */
-  extName?: string;
-  env?: NODE_ENV;
-  /**
-   * server of production environment;
-   * default port is 9526;
-   * default host is 0.0.0.0
-   */
-  server?: {
-    port?: number;
-    host?: string;
-  };
-  /**
-   * development server
-   */
-  devServer?: {
-    port?: number;
-    host?: string;
-  };
-  /**
-   * router;
-   * you can set routers path specific
-   */
-  router?: {
-    type?: "file" | "koa-router";
-    path?: string;
+  constructor(private options?: RoanOptions) {
+    super();
+    this.options = {...DEFAULT_OPTIONS, ...options}
+    this.init();
   }
-}
 
-export type RoanApplication = {
-  config: Config;
-  /**
-   * you can load something else here
-   */
-  ext?: any;
-} & Koa;
-export type Params = Pick<Config, "appPath" | "server" | "router">;
+  private async init() {
+    this.config = await this.getConfig(this.options.rootPath);
+  }
 
-export default async function RoanServer(params: Params) :Promise<RoanApplication> {
-  const { appPath } = params;
-  const env = process.env.NODE_ENV as NODE_ENV;
-  const extName = env === "development" ? ".ts" : ".js";
+  private async getConfig(rootPath: string) {
+    const env = process.env.NODE_ENV;
+    const extName = env === "production" ? ".js" : ".ts";
 
-  const app = (new Koa()) as RoanApplication;
+    const base = await import(path.join(rootPath, `config/config.base${extName}`));
+    const cur = await import(path.join(rootPath, `config/config.${env}${extName}`));
 
-  app.ext = {};
-  app.config = { appPath, env, extName };
-
-  const configs = await getConfig(app);
-  app.config = {...app.config, ...configs};
-
-  await RoanHookLift(app);
-  await RoanHookRouter(app);
-
-  handleEvents(app);
-
-  return app;
-}
-
-/**
- * get config from config path
- * @param app RoanApplication
- */
-async function getConfig(app: RoanApplication) {
-  const {appPath, extName, env} = app.config;
-
-  const base = await import(path.join(appPath, `config/config.base${extName}`));
-  const cur = await import(path.join(appPath, `config/config.${env}${extName}`));
-
-  return merge(base.default(app), cur.default(cur));
-}
-
-/**
- * merge config
- * @param base base config
- * @param other another config
- */
-function merge(base: Config, other: Config) :Config {
-  return {...base, ...other};
-}
-
-/**
- * handle app events, like "error", etc..
- * @param app RoanApplication
- */
-function handleEvents(app: RoanApplication) {
-  app.on("error", err => {});
+    return {...base, ...cur};
+  }
 }

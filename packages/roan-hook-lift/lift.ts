@@ -2,7 +2,7 @@ import https from "https";
 import http from "http";
 import fs from "fs";
 import path from "path";
-import {RoanApplication} from "roan-core";
+import { RoanApplication } from "Params";
 
 /**
  * print init info and start the server (load it to the app-ext)
